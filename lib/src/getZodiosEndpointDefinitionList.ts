@@ -25,7 +25,6 @@ import {
     normalizeString,
     pathParamToVariableName,
     pathToVariableName,
-    replaceHyphenatedPath,
 } from "./utils";
 
 const voidSchema = "z.void()";
@@ -164,7 +163,7 @@ export const getZodiosEndpointDefinitionList = (doc: OpenAPIObject, options?: Te
             const operationName = getOperationAlias(path, method, operation);
             let endpointDefinition: EndpointDefinitionWithRefs = {
                 method: method as EndpointDefinitionWithRefs["method"],
-                path: replaceHyphenatedPath(path),
+                path,
                 ...(options?.withAlias && { alias: operationName }),
                 description: operation.description,
                 requestFormat: "json",
